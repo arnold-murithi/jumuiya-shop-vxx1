@@ -23,7 +23,7 @@ export async function Get(req:NextRequest, {params:{id}}:{params:{id:string}}){
     return new NextResponse(file, {//headers to explain what the file is
         headers:{ 
             "Content-Disposition": `attachment; filename="${product.name}.${extension}"`,//define what the file name is.
-            "Content-length": size.toString(),
+            "Content-length": size.toString(),//to tell the browser how long the file is so that it can give the download estimates
         },
     })
 }
