@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import  fetchSearch  from '../lib/fetchSearch'
+//import  fetchSearch  from '../lib/fetchSearch'
 import { Result } from '../types/searchTypes'
 
 type Props ={
@@ -14,22 +14,22 @@ type Props ={
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string>("")
 
-  useEffect(() =>{
-    const getSearchResults = async() =>{
-      setLoading(true)
-      try {
-        const data:any =await fetchSearch(q)
-      setResults(data);
-      } catch (error) {
-        setError("Results not fetched")
-      }
-    }
-    getSearchResults();
-  },[q])
+  // useEffect(() =>{
+  //   const getSearchResults = async() =>{
+  //     setLoading(true)
+  //     try {
+  //       const data:any =await fetchSearch(q)
+  //     setResults();
+  //     } catch (error) {
+  //       setError("Results not fetched")
+  //     }
+  //   }
+  //   getSearchResults();
+  // },[q])
 
-  console.log(results);
+  // console.log(results);
 
-  console.log("Hello There")
+  // console.log("Hello There")
 
   return (
     <div className='font-semibold'>
