@@ -40,7 +40,11 @@ await prisma.product.create({data:{
 redirect("/admin/products")
 }
 //we need to save files in the file system before we can save the filePath to the database
-export async function toggleProductAvailability(id:string, isAvailableForPurchase:boolean){ await prisma.product.update({where:{id}, data:{isAvailableForPurchase}})//this function is linked to the ActiveToggleDrown function (productActions.tsx)
+export async function toggleProductAvailability(id:string, isAvailableForPurchase:boolean){ 
+    await prisma.product.update({
+        where:{id}, 
+        data:{isAvailableForPurchase}})//this function is linked to the ActiveToggleDrown function (productActions.tsx)
+        
 await prisma.product.update({where:{id}, data:{isAvailableForPurchase}})
 }
 

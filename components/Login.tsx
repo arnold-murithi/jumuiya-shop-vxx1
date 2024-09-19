@@ -19,7 +19,7 @@ function Login() {
           <div>
             <label className="block text-gray-700">Email Address</label>
             <input 
-            type="email" name=""  
+            type="email" name="email"  
             placeholder="Enter Email Address" 
             className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" required/>
           </div>
@@ -27,7 +27,7 @@ function Login() {
           <div className="mt-4">
             <label className="block text-gray-700">Password</label>
             <input
-            type="password" name=""  placeholder="Enter Password"  
+            type="password" name="password"  placeholder="Enter Password"  
             className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
               min-w-64    focus:bg-white focus:outline-none" required/>
           </div>

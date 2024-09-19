@@ -1,7 +1,65 @@
-import React from 'react'
 import { FcGoogle } from 'react-icons/fc'
+import { useForm } from "react-hook-form"
+import {zodResolver} from "@hookform/resolvers/zod"
+import { signupSchema } from '@/lib/schema'
+import { z } from 'zod'
+
+
+//infer type
+type SignupSchema = z.infer<typeof signupSchema>
 
 function Signup() {
+  const {register, handleSubmit,reset, 
+    formState:{errors, isSubmitting},
+    setError, 
+    } = useForm<SignupSchema>({
+      resolver: zodResolver(signupSchema)
+    })
+
+  const onSubmit = async(data:SignupSchema) =>{
+    //send data to the route handler
+   const response = await fetch('api/signup',{
+    method: "POST",
+    body: JSON.stringify({
+      email: data.email,
+      password: data.password,
+      confirmPassword: data.confirmPassword,
+    }),
+    headers:{
+      "Content-type":"application/json"
+    }
+   })
+   const responseData  = await response.json()
+   if (!response.ok){
+    alert ("Submitting form failed")
+
+    return;
+   }
+   console.log(responseData)
+   if (responseData.errors){
+    const errors = responseData.errors;
+    if (errors.email){
+      setError("email",{
+        type: "server",
+        message: errors.email
+      })
+    }else if(errors.password){
+      setError("password", {
+        type: "server",
+        message: errors.password
+      })
+    }else if(errors.confirmPassword){
+      setError("confirmPassword", {
+        type: "server",
+        message: errors.confirmPassword
+      })
+    } else{
+      alert("Something went wrong")
+    }
+   }
+    //reset();
+  }
+   
   return (
     <section className="flex flex-col  h-full items-center mx-auto">
 
@@ -15,43 +73,45 @@ function Signup() {
   
         <h1 className="text-xl md:text-2xl font-bold leading-tight mt-0">Create an account</h1>
   
-        <form className="mt-6" action="#" method="POST">
-        <div>
-            <label className="block text-gray-700">Email your name</label>
-            <input 
-            type="name" name=""  
-            placeholder="Enter your name" 
-            className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" required/>
-          </div>
+        <form className="mt-6" onSubmit={handleSubmit(onSubmit)} method="POST">
           <div>
-            <label className="block text-gray-700">Email Address</label>
+            <label className="block text-slate-700 font-medium font-serif">Email Address</label>
             <input 
-            type="email" name=""  
+            {...register("email")}
+            type="email" name="email"  
             placeholder="Enter Email Address" 
-            className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" required/>
+            className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 
+            focus:bg-white focus:outline-none" />
           </div>
-  
+          {errors.email && <p className="text-red-400">{`${errors.email?.message}`}</p>}
           <div className="mt-4">
-            <label className="block text-gray-700">Password</label>
+            <label className = "block text-slate-700 font-medium font-serif">Password</label>
             <input
-            type="password" name=""  placeholder="Enter Password"  
+            {...register("password")}
+            type = "password" placeholder="Enter Password"  
             className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
-              min-w-64    focus:bg-white focus:outline-none" required/>
+              min-w-64    focus:bg-white focus:outline-none"/>
           </div>
-  
+          {errors.password && <p className="text-red-400">{`${errors.password.message}`}</p>}
+          <div className="pt-4">
+            <label className="block text-slate-700 font-medium font-serif">Confirm Password</label>
+            <input 
+            {...register("confirmPassword")}  
+            type = "password" placeholder="Confirm your password" 
+            className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 
+            focus:bg-white focus:outline-none" />
+          </div>
+          {errors.confirmPassword && <p className="text-red-400">{`${errors.confirmPassword.message}`}</p>}
           <div className="text-right mt-2">
             <a href="#" className="text-sm font-semibold text-gray-700 hover:text-blue-700 focus:text-blue-700">Forgot Password?</a>
           </div>
-  
           <button
-          
+          disabled={isSubmitting}
           type="submit" 
           className="w-full block bg-blue-500 hover:bg-blue-400 focus:bg-blue-400 text-white font-semibold rounded-lg
-                px-4 py-3 mt-6">Sign up</button>
+          px-4 py-3 mt-6 disabled:bg-gray-500">Sign up</button>
         </form>
-  
         <hr className="my-6 border-gray-300 w-full"/>
-
          <button 
          type="button" className="w-full block bg-white hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold rounded-lg px-4 py-3 border border-gray-300">
           <div className="flex items-center justify-center">
@@ -63,10 +123,8 @@ function Signup() {
               </span>
           </div>
         </button>
-  
         <p className="text-sm text-gray-500 mt-8 ml-2">&copy; 2024 ku Ecommerce</p>
       </div>
-
     </div>
   
   </section>
