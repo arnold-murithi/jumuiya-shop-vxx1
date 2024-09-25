@@ -96,7 +96,7 @@ export default function Home() {
   </DropdownMenuContent>
           </DropdownMenu>
         </div> 
-      <Image src={dashboardImage}
+      <Image priority={true} src={dashboardImage}
       className="w-full h-full object-cover absolute"
       alt=""
       />

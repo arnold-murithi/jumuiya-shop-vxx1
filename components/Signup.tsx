@@ -1,26 +1,34 @@
 import { FcGoogle } from 'react-icons/fc'
+import { FiEye } from "react-icons/fi";
 import { useForm } from "react-hook-form"
 import {zodResolver} from "@hookform/resolvers/zod"
 import { signupSchema } from '@/lib/schema'
 import { z } from 'zod'
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 
 //infer type
 type SignupSchema = z.infer<typeof signupSchema>
 
 function Signup() {
+
+  const router = useRouter();
+
   const {register, handleSubmit,reset, 
     formState:{errors, isSubmitting},
-    setError, 
+    setError, watch,
     } = useForm<SignupSchema>({
       resolver: zodResolver(signupSchema)
     })
+    
 
   const onSubmit = async(data:SignupSchema) =>{
     //send data to the route handler
    const response = await fetch('api/signup',{
     method: "POST",
     body: JSON.stringify({
+      name: data.name,
       email: data.email,
       password: data.password,
       confirmPassword: data.confirmPassword,
@@ -33,12 +41,18 @@ function Signup() {
    if (!response.ok){
     alert ("Submitting form failed")
 
-    return;
+   } else {
+    router.push("/")
    }
-   console.log(responseData)
+   //console.log(responseData)
    if (responseData.errors){
     const errors = responseData.errors;
-    if (errors.email){
+    if (errors.name){
+      setError("name", {
+        type:"server",
+        message: errors.name
+      })
+    }else if (errors.email){
       setError("email",{
         type: "server",
         message: errors.email
@@ -61,7 +75,7 @@ function Signup() {
   }
    
   return (
-    <section className="flex flex-col  h-full items-center mx-auto">
+    <section className="flex flex-col h-full items-center mx-auto">
 
     <div className="bg-inherit hidden w-full  h-full mx-auto ">
       {/*<Image src="bg.jpg" alt="" className="w-full h-full object-cover"/>*/}
@@ -73,12 +87,22 @@ function Signup() {
   
         <h1 className="text-xl md:text-2xl font-bold leading-tight mt-0">Create an account</h1>
   
-        <form className="mt-6" onSubmit={handleSubmit(onSubmit)} method="POST">
+        <form className="mt-6 relative" onSubmit={handleSubmit(onSubmit)} method="POST">
+        <div>
+            <label className="block text-slate-700 font-medium font-serif">Username</label>
+            <input 
+            {...register("name")}
+            type="name" name="name" 
+            placeholder="Enter your username" 
+            className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 
+            focus:bg-white focus:outline-none" />
+          </div>
+          {errors.name && <p className="text-red-400">{`${errors.name?.message}`}</p>}
           <div>
             <label className="block text-slate-700 font-medium font-serif">Email Address</label>
             <input 
             {...register("email")}
-            type="email" name="email"  
+            type="email" name="email" 
             placeholder="Enter Email Address" 
             className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 
             focus:bg-white focus:outline-none" />
@@ -90,7 +114,7 @@ function Signup() {
             {...register("password")}
             type = "password" placeholder="Enter Password"  
             className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
-              min-w-64    focus:bg-white focus:outline-none"/>
+              min-w-64 focus:bg-white focus:outline-none"/>
           </div>
           {errors.password && <p className="text-red-400">{`${errors.password.message}`}</p>}
           <div className="pt-4">
