@@ -4,16 +4,15 @@ import { useForm } from "react-hook-form"
 import {zodResolver} from "@hookform/resolvers/zod"
 import { signupSchema } from '@/lib/schema'
 import { z } from 'zod'
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+
 
 
 //infer type
 type SignupSchema = z.infer<typeof signupSchema>
 
+
 function Signup() {
 
-  const router = useRouter();
 
   const {register, handleSubmit,reset, 
     formState:{errors, isSubmitting},
@@ -41,9 +40,7 @@ function Signup() {
    if (!response.ok){
     alert ("Submitting form failed")
 
-   } else {
-    router.push("/")
-   }
+   } 
    //console.log(responseData)
    if (responseData.errors){
     const errors = responseData.errors;

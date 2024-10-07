@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server"
 import { signupSchema } from "@/lib/schema";
 import prisma from "@/app/db/db";
+import * as bcrypt from "bcrypt"
 
 //proceses an incoming request from signup form
 
@@ -19,14 +20,23 @@ export async function POST(request: Request) {
     }
 
     const data = result.data;
+
+    const existingUser = await prisma.user.findUnique({
+        where: {
+            email: data?.email
+        }
+    })
+
+    if (existingUser) {
+        return NextResponse.json({ errors: { email: "Email already in use" } }, { status: 409 })
+    }
     await prisma.user.create({
         data: {
             name: data?.name as string,
             email: data?.email as string,
-            password: data?.password as string
+            password: await bcrypt.hash(data?.password as string, 10)
         },
     })
-
     return NextResponse.json(
         Object.keys(zodErrors).length > 0 ? { errors: zodErrors } : { success: true }//check if the object is empty or not by using Object.keys
     )

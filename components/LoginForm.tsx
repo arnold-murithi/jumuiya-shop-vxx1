@@ -1,5 +1,7 @@
+"use client"
 import React from 'react'
 import { FcGoogle } from "react-icons/fc";
+import { signIn } from 'next-auth/react';
 
 function Login() {
   return (
@@ -15,7 +17,8 @@ function Login() {
   
         <h1 className="text-xl md:text-2xl font-bold leading-tight mt-0">Log in to your account</h1>
   
-        <form className="mt-6" action="#" method="POST">
+        <form 
+        className="mt-6">
           <div>
             <label className="block text-gray-700">Email Address</label>
             <input 
@@ -37,7 +40,7 @@ function Login() {
           </div>
   
           <button
-          
+           onClick={() => signIn()}
           type="submit" 
           className="w-full block bg-blue-500 hover:bg-blue-400 focus:bg-blue-400 text-white font-semibold rounded-lg
                 px-4 py-3 mt-6">Log In</button>

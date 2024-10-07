@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const signupSchema = z.object({
-  name: z.string().min(1, { message: "Username is required" }),
+  name: z.string().min(1, { message: "Username is required" }).regex(/^[a-zA-Z]+$/, { message: "Username must contain only letters(no numbers or special characters)" }),
   email: z.string().min(1, "Email is required").email("Invalid email"),
   password: z.string()
     .min(1, "Password is required")
