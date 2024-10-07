@@ -1,3 +1,4 @@
+
 "use client"
 import Login from '@/components/LoginForm'
 import Modal from '@/components/modal'
@@ -13,5 +14,5 @@ function page() {
     </Modal>
   )
 }
-
-export default page
+     
+export default page;

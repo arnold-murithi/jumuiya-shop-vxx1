@@ -36,10 +36,8 @@ export default function Home() {
   // }
   return (
     <div className="min-h-screen">
-     <Image priority={false} src={dashboardImage}
-      className="w-full h-96 object-cover absolute "
-      alt=""
-      />
+     <Image priority={false} src={dashboardImage} className="w-full h-96 object-cover absolute" alt=""/>
+     
       <div className="ml-5 ">
         <h1 className="text-white text-9xl relative font-bold p-40">ONLINE STORE</h1>
         </div>

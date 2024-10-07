@@ -37,6 +37,7 @@ export default function RootLayout({
         <DashboardNavLink href="/women">Women</DashboardNavLink>
         <DashboardNavLink href="/men">Men</DashboardNavLink>
         <Input type="search" placeholder="Search products...." className="p-2 ml-7 mr-5 placeholder:italic placeholder:text-slate-400 flex-1 w-72 rounded-full"/>
+
           <div className="space-x-3 ">
           <SearchButton/>
           <Button>
