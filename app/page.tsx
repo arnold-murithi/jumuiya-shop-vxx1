@@ -36,7 +36,7 @@ export default function Home() {
   // }
   return (
     <div className="min-h-screen">
-     <Image priority={true} src={dashboardImage}
+     <Image priority={false} src={dashboardImage}
       className="w-full h-96 object-cover absolute "
       alt=""
       />
