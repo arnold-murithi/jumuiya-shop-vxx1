@@ -15,7 +15,7 @@ async function page() {
     <div>
       <h1 className="font-semibold text-2xl">Kids Product Page</h1>
       <div className="flex flex-wrap justify-between">
-          <ul className="m-2 flex flex-wrap justify-between h-auto items-center space-y-4">
+          <ul data-test="product-list" className="m-2 flex flex-wrap justify-between h-auto items-center space-y-4">
           {products.map((product) =>(
             <li key={product.id} className="flex flex-col items-center h-[450px] justify-between bg-gray-50">
               <Image

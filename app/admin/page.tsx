@@ -46,7 +46,7 @@ export default async function AdminDashboard(){ // need to understand what forma
     const {averageValuePerUser, userCount} = await getUserData()
     const {activeProduct, inActiveProduct} = await getProductData()
     return(
-        <div className="grid grid-cols md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div data-test="dashboard-card" className="grid grid-cols md:grid-cols-2 lg:grid-cols-3 gap-4">
             <DashboardCard  title="Sales" subtitle={`${formatNumber(numberOfSales)} orders`} body={formatCurrency(amount)}/>
             <DashboardCard  title="Customer" subtitle={`${formatCurrency(averageValuePerUser)} average value`} body={formatNumber(userCount)}/>
             <DashboardCard  title="Active Products" subtitle={`${formatCurrency(inActiveProduct)} inactive products`} body={formatNumber(activeProduct)}/>

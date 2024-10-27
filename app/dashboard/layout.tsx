@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <>
      <DashboardNavbar>
-        <DashboardNavLink href="/dashboard/kids">Kids</DashboardNavLink>
+        <DashboardNavLink data-test="kids-route" href="/dashboard/kids">Kids</DashboardNavLink>
         <DashboardNavLink href="/dashboard/NewAndFeatured">New & featured</DashboardNavLink>
         <DashboardNavLink href="/dashboard/women">Women</DashboardNavLink>
         <DashboardNavLink href="/dashboard/men">Men</DashboardNavLink>

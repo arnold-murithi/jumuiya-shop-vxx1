@@ -21,11 +21,10 @@ export default function ProductForm({product}:{product?:Product | null}){
             {error.name && <div className="text-destructive">{error.name}</div>}
         </div>
         <div className="space-y-2">
-            <label htmlFor="priceIncents">Price in Cents</label>
+            <label htmlFor="priceIncents">Price in Ksh</label>
             <Input type="number" id="priceInCents" name="priceInCents" value={priceInCents} 
             onChange={(e) => setPriceInCents(Number(e.target.value)||undefined)} required
             />
-            {/*Will show the actual dollar amount*/}
             <div className="text-muted-foreground">{formatCurrency((priceInCents || 0)/100)}</div>
             {error.priceInCents && <div className="text-destructive">{error.priceInCents}</div>}
 
@@ -37,7 +36,7 @@ export default function ProductForm({product}:{product?:Product | null}){
         </div>
         <div className="space-y-2">
             <label htmlFor="file">File</label>
-            <Input type="file" id="file" name="file" required = {product == null}/>
+            <Input data-test="file-input" type="file" id="file" name="file" required = {product == null}/>
             {error.file && <div className="text-destructive">{error.file}</div>}
         </div>
         <div className="space-y-2">

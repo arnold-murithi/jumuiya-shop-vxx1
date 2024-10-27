@@ -28,7 +28,7 @@ function AddToCart ({product}:{product:Product}) {
   }
   
   return (
-    <Button 
+    <Button data-test="add-to-cart"
     onClick={() => addToCart(product)}
     className="bg-sky-600 w-full">
         <IoAdd />Add to cart
