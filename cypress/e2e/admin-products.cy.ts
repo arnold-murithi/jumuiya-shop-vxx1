@@ -64,8 +64,6 @@ describe("Testing add new products functionality", () => {
                 }
             }).as('productPost')
 
-            // cy.wait('@productPost')
-
             cy.location().should((loc) => {
                 expect(loc.origin).to.eq('http://localhost:3000')
                 expect(loc.pathname).to.eq('/admin/products')
