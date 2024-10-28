@@ -6,13 +6,10 @@ function Error({error, reset}:{
     reset: () => void
 }) {
 
-    // useEffect(() =>{
-    //     console.error(error)
-    // },[error])
     
   return (
     <div className="flex items-center justify-center flex-col">
-        <h2>Something went wrong!</h2>
+        <h2>Something went wrong at the root level!</h2>
         <button onClick={() => reset()}>Try again</button>
     </div>
   )
