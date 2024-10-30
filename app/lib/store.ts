@@ -1,5 +1,5 @@
 import { Product } from "@prisma/client";
-import {create} from "zustand"
+import { create } from "zustand"
 import { devtools, persist } from "zustand/middleware"
 
 interface CartState {
@@ -20,6 +20,13 @@ export const useProductStore = create<CartState>()(
             }),
             {
                 name: 'cart-storage',
+                version: 1,
+                migrate: (persistedState, version) => {
+                    if (version === 1) {
+                        return { cart: [] }
+                    }
+                    return persistedState
+                }
             },
         )
     )

@@ -43,6 +43,7 @@ export default function RootLayout({
           <CartComponent/>
           <Profile/>
         </DashboardNavbar>
+        <div>{auth}</div>
         <div>
         {children}
         </div>

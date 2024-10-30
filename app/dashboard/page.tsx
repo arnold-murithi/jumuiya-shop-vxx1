@@ -1,27 +1,6 @@
 "use client"
 import Image from "next/image";
 import dashboardImage from "@/public/interior.jpg"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import Modal from "@/components/modal";
-import { useState } from "react";
-import Signup from "@/components/SignupForm";
-import Login from "@/components/LoginForm";
-import Link from "next/link";
-import { CiSearch } from "react-icons/ci";
-import { BsCart3 } from "react-icons/bs";
-import { CgProfile } from "react-icons/cg";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { MailIcon } from "lucide-react";
-
-
 
 
 export default function Home() {

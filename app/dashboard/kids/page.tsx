@@ -8,9 +8,9 @@ import { getProduct } from '../../data-access/product'
 
 
 
-async function page() {
+export default async function Kids() {
 
-  const products:Product[] =await getProduct()
+  const products:Product[] = await getProduct()
   return (
     <div>
       <h1 className="font-semibold text-2xl">Kids Product Page</h1>
@@ -36,5 +36,3 @@ async function page() {
     </div>
   )
 }
-
-export default page
