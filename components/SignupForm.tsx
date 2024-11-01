@@ -1,3 +1,4 @@
+"use client"
 import { FcGoogle } from 'react-icons/fc'
 import { FiEye } from "react-icons/fi";
 import { useForm } from "react-hook-form"
@@ -72,13 +73,13 @@ function Signup() {
   }
    
   return (
-    <section className="flex flex-col h-full items-center mx-auto">
+    <section className=" flex flex-col h-full items-center mx-auto">
 
     <div className="bg-inherit hidden w-full  h-full mx-auto ">
       {/*<Image src="bg.jpg" alt="" className="w-full h-full object-cover"/>*/}
     </div>
   
-    <div className="w-1/2 flex items-center justify-center">
+    <div className="lg:w-2/5 sm:w-1/2 flex items-center justify-center">
   
       <div className="w-full h-full">
   

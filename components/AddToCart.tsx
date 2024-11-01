@@ -11,7 +11,7 @@ function AddToCart ({product}:{product:Product}) {
   const addToCart = useProductStore((state) => state.addToCart)
 
   const itemsInCart = cart.length
-  console.log("Items in the cart",itemsInCart)
+  
 
   if (itemsInCart > 0){
      return(

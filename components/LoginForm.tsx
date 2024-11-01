@@ -11,7 +11,7 @@ function Login() {
       {/*<Image src="bg.jpg" alt="" className="w-full h-full object-cover"/>*/}
     </div>
   
-    <div className="w-1/2 flex items-center justify-center">
+    <div className="lg:w-2/5 sm:w-1/2 flex items-center justify-center">
   
       <div className="w-full h-full">
   

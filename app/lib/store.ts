@@ -13,10 +13,8 @@ export const useProductStore = create<CartState>()(
         persist(
             (set) => ({
                 cart: [],
-                addToCart: (product) => {
-                    set((state) => ({ cart: [...state.cart, product] }))
-                },
-                removeFromCart: (id) => set((state) => ({ cart: state.cart.filter((product) => product.id !== id) })),
+                addToCart: (product) => set((state) => ({ cart: [...state.cart, product] })),
+                removeFromCart: (id) => set((state) => ({ cart: state.cart.filter((product) => product.id !== id) }))
             }),
             {
                 name: 'cart-storage',

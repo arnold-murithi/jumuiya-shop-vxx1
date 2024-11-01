@@ -29,7 +29,6 @@ function Modal ({children, onClose}:ModalProps) {
             className='size-5 place-self-end'/>
             <div className="bg-white p-5">
               {children}
-                {/*<Login/>*/}
             </div>
         </div>
     </div>
