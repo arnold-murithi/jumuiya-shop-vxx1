@@ -9,7 +9,6 @@ import RemoveFromCart from './RemoveFromCart';
 function AddToCart ({product}:{product:Product}) {
   const cart = useProductStore((state) => state.cart);
   const addToCart = useProductStore((state) => state.addToCart)
-
   const itemsInCart = cart.length
   
 
@@ -28,11 +27,11 @@ function AddToCart ({product}:{product:Product}) {
   }
   
   return (
-    <Button data-test="add-to-cart"
+    <button data-test="add-to-cart"
     onClick={() => addToCart(product)}
-    className="bg-sky-600 w-full">
-        <IoAdd />Add to cart
-    </Button>
+    className="h-10 px-6 font-semibold rounded-full border border-slate-200 text-slate-900 bg-slate-300">
+        Add to cart
+    </button>
   )
 }
 
