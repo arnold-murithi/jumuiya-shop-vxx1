@@ -11,7 +11,7 @@ function CartComponent() {
   return (
     <div className="flex flex-col items-center">
         {cart.length > 0 ? <p className="text-yellow-200">{cart.length} items</p>: "no items"}
-        <Link href="/cart">
+        <Link href="/dashboard/cart">
         <BsCart3 className="ml-6 float-right text-2xl" />
         </Link>
         <p className="ml-2 text-yellow-200">kes:{total}</p>  
