@@ -6,8 +6,8 @@ import AddToCart from './AddToCart'
 function ListItem({product}:{product:Product}) {
   return (
     <div className="flex font-sans items-center justify-center">
-      <div className="flex-auto p-4 border-r-0">
-        <div className="min-h-full min-w-64">
+      <div className="flex-auto p-4 border-r-0 ml-2">
+        <div className="min-h-full w-64 p-4 m-4 bg-gray-50">
           <div className="flex flex-wrap">
             <div className="flex flex-col m-2 space-y-0 place-items-center">
             <Image src={product.imagePath} width={200} height={200}
@@ -65,7 +65,7 @@ function ListItem({product}:{product:Product}) {
             </button>
           </div>
           <p className="text-sm text-slate=500">Free delivery</p>
-                </div>
+          </div>
         </div>
     </div>
   )

@@ -6,12 +6,38 @@ import { getCartTotal } from '@/app/lib/cartTotal'
 import Image from 'next/image'
 import AddToCart from './AddToCart'
 import { Button } from './ui/button'
+import Link from 'next/link'
+import { createCheckoutSession } from '@/app/api/checkout_session'
+import { Metadata } from '@/app/api/checkout_session'
+// import { getUsers } from '@/app/data-access/product'
+import { User } from '@prisma/client'
 
-function Basket() {
+//props are imported from cart logic
+function Basket({user}:{user:User}) {
     const cart = useProductStore((state) => state.cart)
     const total = getCartTotal(cart)
     const consolidatedCart = getConsolidatedCart(cart)
     console.log(consolidatedCart)
+
+    const handleCheckout = async () =>{
+      // const user = await getUsers()
+      try {
+        const metadata: Metadata = {
+          orderNumber: crypto.randomUUID(),
+          customerName: user?.name as string,
+          customerEmail: user?.email as string,
+          userId: user?.id as string,
+        }
+        const checkoutUrl = await createCheckoutSession(consolidatedCart, metadata)
+        
+        if (checkoutUrl){
+          window.location.href = checkoutUrl;
+        }
+      } catch (error) {
+        console.error("Error creating checkout session", error)
+        throw error
+      }
+    }
   return (
     <div className="max-w-7xl mx-auto">
       {consolidatedCart.length === 0 ? (
@@ -36,7 +62,9 @@ function Basket() {
               </div>
             </li>
           ))}
-           <Button className="w-full bg-purple-950 text-lg font-sans">Checkout (Ksh:{total})</Button>
+           <Button onClick={handleCheckout} className="w-full bg-purple-950 text-lg font-sans mt-4">
+                 Checkout (Ksh:{total})
+           </Button>
         </ul>
       )}
     </div>

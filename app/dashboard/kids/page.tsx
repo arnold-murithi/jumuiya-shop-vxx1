@@ -10,14 +10,17 @@ import List from '@/components/ListUnordered'
 
 
 
-export default async function Kids() {
-
+export default async function Kids({searchParams}:{searchParams?:{query?:string}}) {
+const query = searchParams?.query || ""
   const products:Product[] = await getProduct()
+  const filteredProducts = Array.isArray(products) ? products.filter((product) =>{
+    return product.name.toLowerCase().includes(query.toLowerCase())
+  }):[]
   return (
    <>
        <h1 className="font-semibold text-2xl">Kids Product Page</h1>
    <List>
-    {products.map((product) =>(
+    {Array.isArray(products) && filteredProducts.map((product) =>(
       <ListItem key={product.id} product={product}/>
     ))}
    </List>
