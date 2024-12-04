@@ -7,7 +7,7 @@ function ListItem({product}:{product:Product}) {
   return (
     <div className="flex font-sans items-center justify-center">
       <div className="flex-auto p-4 border-r-0 ml-2">
-        <div className="min-h-full w-64 p-4 m-4 bg-gray-50">
+        <div className="min-h-full w-64 p-4 m-4 bg-gray-50 rounded-md drop-shadow-md">
           <div className="flex flex-wrap">
             <div className="flex flex-col m-2 space-y-0 place-items-center">
             <Image src={product.imagePath} width={200} height={200}

@@ -30,7 +30,7 @@ function AddToCart ({product}:{product:Product}) {
     <button data-test="add-to-cart"
     onClick={() => addToCart(product)}
     className="h-10 px-6 font-semibold rounded-full border border-slate-200 text-slate-900 bg-slate-300">
-        Add to cart
+        <span className="text-lg -tracking-2">+Add</span>
     </button>
   )
 }
