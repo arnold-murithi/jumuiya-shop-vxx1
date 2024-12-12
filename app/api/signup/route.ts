@@ -2,6 +2,7 @@ import { NextResponse } from "next/server"
 import { signupSchema } from "@/lib/schema";
 import prisma from "@/app/db/db";
 import * as bcrypt from "bcrypt"
+import { redirect } from "next/navigation";
 
 //proceses an incoming request from signup form
 
@@ -37,7 +38,10 @@ export async function POST(request: Request) {
             password: await bcrypt.hash(data?.password as string, 10)
         },
     })
-    return NextResponse.json(
-        Object.keys(zodErrors).length > 0 ? { errors: zodErrors } : { success: true }//check if the object is empty or not by using Object.keys
-    )
+
+    return NextResponse.redirect('/dashboard')
+
+    // return NextResponse.json(
+    //     Object.keys(zodErrors).length > 0 ? { errors: zodErrors } : { success: true }//check if the object is empty or not by using Object.keys
+    // )
 }

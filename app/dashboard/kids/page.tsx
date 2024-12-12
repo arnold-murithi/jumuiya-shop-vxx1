@@ -1,14 +1,8 @@
 import { Prisma, Product } from '@prisma/client'
 import React from 'react'
-import prisma from '../../db/db'
-import Image from 'next/image'
-import { Button } from '@/components/ui/button'
-import AddToCart from '@/components/AddToCart';
 import { getProduct } from '../../data-access/product'
 import ListItem from '@/components/ListItem'
 import List from '@/components/ListUnordered'
-
-
 
 export default async function Kids({searchParams}:{searchParams?:{query?:string}}) {
 const query = searchParams?.query || ""

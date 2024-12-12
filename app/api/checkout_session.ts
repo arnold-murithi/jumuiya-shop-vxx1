@@ -1,4 +1,4 @@
-import { Product, User } from "@prisma/client";
+import { Product } from "@prisma/client";
 // process.env.STRIPE_SECRET_KEY
 const stripe = require('stripe')('sk_test_51QPSIYAhbvSUQO3mTRYhUYeWOvDh223eoGnvxZS4a2XZ1Z8IjkMGlEA7EaIQrllCGBXOxirHxH2AryXWs8JyGL70002XKLsY2N')
 
@@ -9,7 +9,6 @@ export type Metadata = {
     userId: string;
 }
 export type GroupedBasketItems = Product & {
-    // product: Product
     quantity: number;
 }
 
@@ -24,7 +23,6 @@ export async function createCheckoutSession(items: GroupedBasketItems[], user: M
             email: user.customerEmail,
             limit: 1
         })
-
         let customerId: string | undefined;
 
         if (customers.data.length > 0) {
@@ -38,8 +36,8 @@ export async function createCheckoutSession(items: GroupedBasketItems[], user: M
             // metadata,
             mode: "payment",
             allow_promotion_codes: true,
-            success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/payment?status=success`,
-            cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/payment?status=failed`,
+            success_url: 'http://localhost:3000/dashboard/cart/checkout',
+            cancel_url: 'http://localhost:3000/failed',
             line_items: items.map((item) => ({
                 price_data: {
                     currency: "gbp",
@@ -50,7 +48,9 @@ export async function createCheckoutSession(items: GroupedBasketItems[], user: M
                         metadata: {
                             id: item.id
                         },
-                        image: [item.imagePath]
+                        images: [item.imagePath.startsWith("http")
+                            ? item.imagePath
+                            : `${'pk_test_51QPSIYAhbvSUQO3mvaIhMTz5rNoKeyWraiOildqL44Md1stPo8UfvLbNuUrOCykF1y0FHMT1RtdX560bnWsLbg74003j6Tcd5u'}${item.imagePath}`]
                     }
                 },
                 quantity: item.quantity
