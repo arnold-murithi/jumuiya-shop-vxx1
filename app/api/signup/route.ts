@@ -39,9 +39,9 @@ export async function POST(request: Request) {
         },
     })
 
-    return NextResponse.redirect('/dashboard')
+    // return NextResponse.redirect('/dashboard')
 
-    // return NextResponse.json(
-    //     Object.keys(zodErrors).length > 0 ? { errors: zodErrors } : { success: true }//check if the object is empty or not by using Object.keys
-    // )
+    return NextResponse.json(
+        Object.keys(zodErrors).length > 0 ? { errors: zodErrors } : { success: true }//check if the object is empty or not by using Object.keys
+    )
 }
