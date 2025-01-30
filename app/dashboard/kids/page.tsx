@@ -12,8 +12,8 @@ const query = searchParams?.query || ""
   }):[]
   return (
    <>
-       <h1 className="font-semibold text-2xl">Kids Product Page</h1>
-   <List>
+       <h1 data-test="products-header" className="font-semibold text-2xl">Kids Product Page</h1>
+   <List data-test="product-list">
     {Array.isArray(products) && filteredProducts.map((product) =>(
       <ListItem key={product.id} product={product}/>
     ))}

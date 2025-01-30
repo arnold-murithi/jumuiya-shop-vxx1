@@ -24,7 +24,8 @@ export default function SearchPage(){
   return(
       <input 
       defaultValue={searchParams.get('query')?.toString()}
-      type="text" placeholder="Search products...." className="p-2 ml-7 mr-5 placeholder:italic text-slate-800 placeholder:text-slate-400 flex-1 w-72 rounded-full"
+      type="text" placeholder="Search products...." className="p-2 ml-7 mr-5 placeholder:italic text-slate-800 placeholder:text-slate-400 
+      grow lg:w-72 rounded-full md:w-60 sm:w-6"
       onChange={(e) =>{handleSearch(e.target.value)}}/>
   )
 }

@@ -11,9 +11,9 @@ export default async function Home() {
   
   return (
   <div className="min-h-screen w-full sm:min-w-64">
-    <div className="bg-red-400 h-96 mb-2 ">
-      <div className="items-center m-4 ">
-       <Image priority={false} src={dashboardImage} className="w-full h-96 object-cover absolute" alt=""/>
+    <div className="h-96 mb-2 rounded-md mt-1">
+      <div className="items-center">
+       <Image priority={false} src={dashboardImage} className="w-full h-96 object-cover absolute rounded-md" alt=""/>
         <div className="items-center justify-center">
           <span className="m-8 p-2 box-decoration-slice bg-gradient-to-r from-gray-800 to-gray-200 text-white
           text-6xl relative font-bold">

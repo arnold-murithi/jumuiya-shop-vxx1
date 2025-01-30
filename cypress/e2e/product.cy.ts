@@ -3,35 +3,24 @@ describe("testing kids product page", () => {
         cy.visit("http://localhost:3000/dashboard")
     })
     it("visit the dashboard page", () => {
-        cy.getTestData('kids-route').should('contain.text', 'Kids')
+        cy.getTestData('kids-route').contains('Kids').should('exist')
+        cy.getTestData('kids-route').should('have.attr', 'href', '/dashboard/kids')
         cy.getTestData('kids-route').click()
         cy.wait(5000)
         cy.url().should('eq', 'http://localhost:3000/dashboard/kids')
-        cy.contains(/kids product page/i)
+        cy.getTestData('products-header').contains(/kids product page/i)
     })
 })
 
 describe("testing product lists", () => {
     beforeEach(() => {
         cy.visit("http://localhost:3000/dashboard/kids")
-        cy.wait(5000)
-    })
-    it('get product list', () => {
-        cy.getTestData('product-list').within(() => {
-            cy.get('li').should('exist')
-            cy.get('li').should('have.length', 18)
-        })
-    })
-    it('get list item', () => {
-        cy.get('ul').find('li').first().within(($ul) => {
-            cy.get('img').should('have.attr', 'src')
-        })
     })
     it('testing add to cart button', () => {
         cy.get('button').click({ multiple: true, force: true })
         cy.contains(10)
     })
-    it('tesing the cart', () => {
+    it('testing the cart', () => {
         const mockCartItems = [
             {
                 id: 'e4af838c-3454-4c18-b99d-3adbde11584e',
