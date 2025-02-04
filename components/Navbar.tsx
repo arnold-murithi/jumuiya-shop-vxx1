@@ -6,12 +6,20 @@ import { Menu, X, Search, User } from "lucide-react"
 import CartComponent from "./CartComponent"
 import Profile from "./profile"
 import SearchPage from "./SearchPage"
+import { useRouter } from "next/navigation"
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const router = useRouter();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
+  }
+  const handleLoginClick = () =>{
+    router.push('/dashboard/login')
+  }
+  const handleSignupClick = () =>{
+    router.push('/dashboard/signup')
   }
 
   return (
@@ -20,12 +28,12 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <Link href="/" className="font-bold text-xl">
-              Logo
+            Logo
             </Link>
           </div>
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
-              <Link href="/dashboard/new-featured" className="hover:bg-blue-600 px-3 py-2 rounded-md">
+              <Link href="/dashboard/new" className="hover:bg-blue-600 px-3 py-2 rounded-md">
                 New & Featured
               </Link>
               <Link href="/dashboard/kids" className="hover:bg-blue-600 px-3 py-2 rounded-md">
@@ -44,8 +52,12 @@ const Navbar = () => {
               <div className="relative">
                 <SearchPage />
               </div>
-              <button className="md:hidden ml-3 bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded-md">Login</button>
-              <button className="md:hidden ml-3 bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded-md">Sign Up</button>
+              <button onClick={handleLoginClick} className=" ml-3 bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded-md">
+                Login
+              </button>
+              <button onClick={handleSignupClick} className=" ml-3 bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded-md">
+                Signup
+              </button>
               {/*<User className="ml-3 h-6 w-6" />*/}
               <CartComponent data-test="cart-component"/>
               <Profile/>
