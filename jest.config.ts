@@ -23,6 +23,8 @@ const config: Config = {
 
   // Automatically clear mock calls, instances, contexts and results before every test
   clearMocks: true,
+  preset: 'ts-jest',
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
 
   // Indicates whether the coverage information should be collected while executing the test
   collectCoverage: true,
@@ -37,10 +39,15 @@ const config: Config = {
   // coveragePathIgnorePatterns: [
   //   "\\\\node_modules\\\\"
   // ],
-
+  verbose: true,
   // Indicates which provider should be used to instrument code for coverage
   coverageProvider: "v8",
-  testEnvironment: 'jsdom',
+  testEnvironment: 'jest-environment-jsdom',
+  moduleNameMapper: {
+    // Handle module aliases (if you're using them in your project)
+    '^@/components/(.*)$': '<rootDir>/components/$1',
+    '^@/pages/(.*)$': '<rootDir>/pages/$1',
+  },
   // A list of reporter names that Jest uses when writing coverage reports
   // coverageReporters: [
   //   "json",
