@@ -6,7 +6,7 @@ import List from '@/components/ListUnordered'
 
 export default async function Kids({searchParams}:{searchParams?:{query?:string}}) {
 const query = searchParams?.query || ""
-  const products:Product[] = await getProduct();
+  const products:Product[] = await getProduct() || [];
   const filteredProducts = Array.isArray(products) ? products.filter((product) =>{
     return product.name.toLowerCase().includes(query.toLowerCase())
   }):[]
