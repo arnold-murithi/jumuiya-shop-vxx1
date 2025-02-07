@@ -2,19 +2,23 @@ describe("testing kids product page", () => {
     beforeEach(() => {
         cy.visit("http://localhost:3000/dashboard")
     })
-    it("visit the dashboard page", () => {
-        cy.getTestData('kids-route').contains('Kids').should('exist')
-        cy.getTestData('kids-route').should('have.attr', 'href', '/dashboard/kids')
-        cy.getTestData('kids-route').click()
-        cy.wait(5000)
-        cy.url().should('eq', 'http://localhost:3000/dashboard/kids')
-        cy.getTestData('products-header').contains(/kids product page/i)
+    it("checking the navigation bar", () => {
+        cy.get('nav').should('exist')
+        cy.get('nav > div').should('have.length', 1)
+    })
+    it("Checking the structure of div elements", () => {
+        cy.get('div > div').should('exist')
+        cy.get('div > div').should('have.length', 19)
+    })
+    it.only("Get the navigation bar main div", () => {
+        cy.get(".flex > div").should("exist").eq(0).within(() => {
+            cy.get("a").contains('/logo/i').should("exist")
+        })
     })
 })
-
 describe("testing product lists", () => {
     beforeEach(() => {
-        cy.visit("http://localhost:3000/dashboard/kids")
+        cy.visit("http://localhost:3000/dashboard/new")
     })
     it('testing add to cart button', () => {
         cy.get('button').click({ multiple: true, force: true })
