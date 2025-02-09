@@ -1,9 +1,9 @@
 "use client"
 import {useDebouncedCallback} from "use-debounce"
-import { Input } from "@/components/ui/input";
 import { usePathname, useSearchParams } from "next/navigation"
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+
 
 export default function SearchPage(){
   const [isTyping, setIsTyping] = useState(false)
@@ -22,7 +22,7 @@ export default function SearchPage(){
     replace(`${pathname}?${params.toString()}`);
   }, 300)
   return(
-      <input 
+      <input data-test="search-input"
       defaultValue={searchParams.get('query')?.toString()}
       type="text" placeholder="Search products...." className="p-2 ml-7 mr-5 placeholder:italic text-slate-800 placeholder:text-slate-400 
       min-w-96 rounded-full"

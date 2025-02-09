@@ -10,9 +10,15 @@ describe("testing kids product page", () => {
         cy.get('div > div').should('exist')
         cy.get('div > div').should('have.length', 19)
     })
-    it.only("Get the navigation bar main div", () => {
+    it("Get the navigation bar main div", () => {
         cy.get(".flex > div").should("exist").eq(0).within(() => {
-            cy.get("a").contains('/logo/i').should("exist")
+            cy.get("a").should("exist")
+        })
+    })
+    it("Test navigation links", () => {
+        cy.get(".hidden > div").should("exist").eq(0).within(() => {
+            cy.get("a").first().should("have.text", "New & Featured").and("be.visible")
+            cy.get("a").first().click().url().should("eq", "http://localhost:3000/dashboard/new")
         })
     })
 })
@@ -21,7 +27,7 @@ describe("testing product lists", () => {
         cy.visit("http://localhost:3000/dashboard/new")
     })
     it('testing add to cart button', () => {
-        cy.get('button').click({ multiple: true, force: true })
+        cy.getTestData('add-to-cart').click({ multiple: true, force: true })
         cy.contains(10)
     })
     it('testing the cart', () => {

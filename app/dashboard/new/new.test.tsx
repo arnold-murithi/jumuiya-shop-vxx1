@@ -1,8 +1,8 @@
 import Kids from "./page";
 import "@testing-library/jest-dom"
-import {render, screen} from "@testing-library/react"
 import { getProduct } from '../../data-access/product'
 import { Product } from "@prisma/client";
+
 jest.mock('../../data-access/product', () => ({
   getProduct: jest.fn(),
 }));

@@ -17,7 +17,7 @@ function AddToCart ({product}:{product:Product}) {
       <div className="flex space-x-5 items-center">
         <RemoveFromCart product={product}/>
         <span>{itemsInCart}</span>
-        <Button 
+        <Button data-test="add-to-cart"
       onClick={() => addToCart(product)}
       className="bg-sky-600 w-1/3">
       <IoAdd />
