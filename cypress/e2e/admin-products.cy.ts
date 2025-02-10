@@ -2,7 +2,7 @@ describe("Test the admin products page", () => {
     beforeEach(() => {
         cy.visit('http://localhost:3000/admin')
     })
-    it('navigate to admin product page', () => {
+    it('should navigate to admin product page', () => {
         cy.getTestData('products-route').should('exist')
         cy.getTestData('products-route').click()
         cy.location().should((loc) => {
@@ -12,14 +12,14 @@ describe("Test the admin products page", () => {
         cy.contains(/products/i)
     })
 })
-describe("Testing add new products functionality", () => {
+describe("Should test add new products functionality", () => {
     beforeEach(() => {
         cy.visit('http://localhost:3000/admin/products')
     })
-    it('Testing add new product button and product form', () => {
+    it('should test add new product button and product form', () => {
 
         cy.getTestData('add-product').should('exist')
-        cy.getTestData('add-product').click()
+        cy.getTestData('add-product').click().url
 
         cy.location().should((loc) => {
             expect(loc.origin).to.eq('http://localhost:3000')

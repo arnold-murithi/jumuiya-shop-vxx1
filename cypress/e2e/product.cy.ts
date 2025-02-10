@@ -15,7 +15,7 @@ describe("testing kids product page", () => {
             cy.get("a").should("exist")
         })
     })
-    it("Test navigation links", () => {
+    it("should test navigation links", () => {
         cy.get(".hidden > div").should("exist").eq(0).within(() => {
             cy.get("a").first().should("have.text", "New & Featured").and("be.visible")
             cy.get("a").first().click().url().should("eq", "http://localhost:3000/dashboard/new")
