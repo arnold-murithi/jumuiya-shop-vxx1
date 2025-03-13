@@ -2,15 +2,15 @@ describe("testing kids product page", () => {
     beforeEach(() => {
         cy.visit("http://localhost:3000/dashboard")
     })
-    it("checking the navigation bar", () => {
+    it("should check the navigation bar", () => {
         cy.get('nav').should('exist')
         cy.get('nav > div').should('have.length', 1)
     })
-    it("Checking the structure of div elements", () => {
+    it("should check the structure of div elements", () => {
         cy.get('div > div').should('exist')
         cy.get('div > div').should('have.length', 19)
     })
-    it("Get the navigation bar main div", () => {
+    it("should get navigation bar main div", () => {
         cy.get(".flex > div").should("exist").eq(0).within(() => {
             cy.get("a").should("exist")
         })
@@ -26,7 +26,7 @@ describe("testing product lists", () => {
     beforeEach(() => {
         cy.visit("http://localhost:3000/dashboard/new")
     })
-    it('testing add to cart button', () => {
+    it('should test add to cart button', () => {
         cy.getTestData('add-to-cart').click({ multiple: true, force: true })
         cy.contains(10)
     })

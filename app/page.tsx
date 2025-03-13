@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation'
 import React, { useEffect } from 'react'
 
-function page() {
+function Page() {
   const router = useRouter();
   useEffect(() =>{
     router.push("/dashboard")
@@ -10,4 +10,4 @@ function page() {
   return null
 }
 
-export default page
+export default Page

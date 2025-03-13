@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { getCartTotal } from '@/app/lib/cartTotal'
 import { useProductStore } from '@/app/lib/store'
 
-function page() {
+function Page() {
   const cart = useProductStore((state) => state.cart)
   let totalAmount = getCartTotal(cart);
 
@@ -19,4 +19,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

@@ -7,6 +7,8 @@ import CartComponent from "./CartComponent"
 import Profile from "./profile"
 import SearchPage from "./SearchPage"
 import { useRouter } from "next/navigation"
+import Logo from "../public/mylogo.jpg"
+import Image from "next/image"
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -27,8 +29,9 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <Link href="/" className="font-bold text-xl">
-            Logo
+            <Link href="/dashboard" className="font-bold text-xl place-items-center mt-1">
+            <Image src={Logo} width={50} height={50} alt="logo"/>
+            <span className="font-serif lg:text-nowrap text-sm">Market Sphere</span>
             </Link>
           </div>
           <div className="hidden md:block">
