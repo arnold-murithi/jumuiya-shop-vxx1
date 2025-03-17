@@ -5,6 +5,10 @@ import fs from "fs/promises"
 
 export async function GET(req: NextRequest, { params: { id } }: { params: { id: string } }) {
 
+    if (!id) {
+        return notFound()
+    }
+
     const product = await prisma.product.findUnique({
         where: { id },
         select: {
