@@ -9,3 +9,6 @@ export async function getFiveProducts() {
         take: 5,
     })
 }
+export async function getUser() {
+    return await prisma.user.findFirst()
+}
