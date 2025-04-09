@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
 import fs from "fs/promises"
 
+export const dynamic = "force-dynamic";
+
 export async function GET(req: NextRequest, { params: { id } }: { params: { id: string } }) {
 
     if (!id) {
