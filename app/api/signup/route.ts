@@ -3,10 +3,14 @@ import { signupSchema } from "@/lib/schema";
 import prisma from "@/app/db/db";
 import * as bcrypt from "bcrypt"
 
+export const dynamic = "force-dynamic";
+
+
 //proceses an incoming request from signup form
 
 export async function POST(request: Request) {
     //data will be sent to this route, Grab the data through the body variable
+
 
     try {
         const body: unknown = await request.json()
