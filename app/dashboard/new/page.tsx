@@ -1,5 +1,5 @@
 import { Prisma, Product } from '@prisma/client'
-import React from 'react'
+import React, { Suspense } from 'react'
 import { getProduct } from '../../data-access/product'
 import ListItem from '@/components/ListItem'
 import List from '@/components/ListUnordered'
@@ -13,11 +13,13 @@ const query = searchParams?.query || ""
   return (
    <>
        <h1 data-test="products-header" className="font-semibold text-2xl">Kids Product Page</h1>
-   <List data-test="product-list">
-    {Array.isArray(products) && filteredProducts.map((product) =>(
-      <ListItem key={product.id} product={product}/>
-    ))}
-   </List>
+   <Suspense fallback={<h2 className="text-lg font-semibold">Loading...</h2>}>
+     <List data-test="product-list">
+      {Array.isArray(products) && filteredProducts.map((product) =>(
+        <ListItem key={product.id} product={product}/>
+      ))}
+     </List>
+   </Suspense>
    </>
   )
 }

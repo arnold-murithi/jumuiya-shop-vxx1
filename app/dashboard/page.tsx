@@ -1,14 +1,9 @@
 import Image from "next/image";
 import dashboardImage from "@/public/interior.jpg"
-import { getFiveProducts } from "../data-access/product";
-import { Button } from "@/components/ui/button";
-
 
 
 export default async function Home() {
-
-  const fiveProducts = await getFiveProducts()
-  
+ 
   return (
   <div className="min-h-screen w-full sm:min-w-64">
     <div className="h-96 mb-2 rounded-md mt-1">

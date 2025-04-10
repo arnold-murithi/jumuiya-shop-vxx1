@@ -1,7 +1,8 @@
 import Basket from '@/components/Basket'
-import React from 'react'
+import React, { Suspense } from 'react'
 import { BsCart3 } from 'react-icons/bs'
 import { getUser } from '@/app/data-access/product'
+import SkeletonCard from '@/components/SkeletonCard'
 
 async function page() {
   const user = await getUser()
@@ -12,7 +13,9 @@ async function page() {
       <h1 className="font-semibold text-3xl">Welcome to cart</h1>
       </div>
       <p className="text-large font-normal">Review the items in the cart and checkout when ready </p>
+      <Suspense fallback={<SkeletonCard/>}>
       <Basket user={user!}/>
+      </Suspense>
     </div>
   )
 }
