@@ -1,24 +1,13 @@
-import { Prisma, Product } from '@prisma/client'
 import React, { Suspense } from 'react'
-import { getProduct } from '../../data-access/product'
-import ListItem from '@/components/ListItem'
-import List from '@/components/ListUnordered'
+import SearchProducts from './SearchProducts'
+import Loading from '../loading'
 
-export default async function Kids({searchParams}:{searchParams?:{query?:string}}) {
-const query = searchParams?.query || ""
-  const products:Product[] = await getProduct() || [];
-  const filteredProducts = Array.isArray(products) ? products.filter((product) =>{
-    return product.name.toLowerCase().includes(query.toLowerCase())
-  }):[]
+export default async function Kids() {
+ await new Promise((resolve) => setTimeout(resolve, 1000));
   return (
    <>
-       <h1 data-test="products-header" className="font-semibold text-2xl">Kids Product Page</h1>
-   <Suspense fallback={<h2 className="text-lg font-semibold">Loading...</h2>}>
-     <List data-test="product-list">
-      {Array.isArray(products) && filteredProducts.map((product) =>(
-        <ListItem key={product.id} product={product}/>
-      ))}
-     </List>
+   <Suspense fallback={<Loading/>}>
+     <SearchProducts/>
    </Suspense>
    </>
   )
