@@ -14,6 +14,7 @@ return {
 }
 }
 
+    
 async function getUserData(){
     const [userCount, orderData] = await Promise.all([
         prisma.user.count(),
@@ -26,7 +27,7 @@ async function getUserData(){
         userCount,
         averageValuePerUser: userCount == 0 ? 0 : (orderData._sum.pricePaidInCents || 0) / userCount /100
     }
-}
+} 
 
 function wait(duration: number){
     return new Promise(resolve => setTimeout(resolve, duration))
