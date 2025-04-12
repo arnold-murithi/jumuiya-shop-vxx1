@@ -1,14 +1,25 @@
-import { Product } from '@prisma/client'
-import { getProduct } from '../../data-access/product'
+"use client"
 import ListItem from '@/components/ListItem'
 import List from '@/components/ListUnordered'
-export default async function SearchProducts({searchParams}:{searchParams?:{query?:string}}){
-        const products:Product[] = await getProduct() || [];
-    
-        if (!products || products.length === 0){
-            return <div className="w-1/3 text-center mx-auto p-10 text-lg text-red-300">No products found</div>
-        }
-    const query = searchParams?.query || "";
+import { useSearchParams } from 'next/navigation'
+
+type Product = {
+    id: string;
+    name: string;
+    priceInCents: number;
+    filePath: string;
+    imagePath: string;
+    description: string;
+    isAvailableForPurchase: boolean;
+    createdAt: Date;
+    updatedAt: Date;
+}
+type Props = {
+    products: Product[];
+}
+export default async function SearchProducts({products}:{products: Props["products"]}) {
+    const searchParams = useSearchParams();
+    const query = searchParams.get("query") || "";
     const filteredProducts = Array.isArray(products) ? products.filter((product) =>{
         return product.name.toLowerCase().includes(query.toLowerCase())
     }) : [];
