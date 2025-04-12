@@ -1,7 +1,7 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import prisma from "../db/db";
 import { formatCurrency, formatNumber } from "../lib/formatter";
-import { resolve } from "path";
+
 
  async function getSalesData(){
 const data = await prisma.order.aggregate({
@@ -22,16 +22,12 @@ async function getUserData(){
         _sum: {pricePaidInCents:true}
     })
     ])
-    await wait(2000)
+    
     return {
         userCount,
         averageValuePerUser: userCount == 0 ? 0 : (orderData._sum.pricePaidInCents || 0) / userCount /100
     }
 } 
-
-function wait(duration: number){
-    return new Promise(resolve => setTimeout(resolve, duration))
-}
 
 async function getProductData(){
     const [activeProduct, inActiveProduct] = await Promise.all([
@@ -42,7 +38,7 @@ async function getProductData(){
         activeProduct, inActiveProduct
     }
 }
-export default async function AdminDashboard(){ // need to understand what formatNumber and formatCurrency mean
+export default async function AdminDashboard(){
     const {amount, numberOfSales} = await getSalesData()
     const {averageValuePerUser, userCount} = await getUserData()
     const {activeProduct, inActiveProduct} = await getProductData()
@@ -51,7 +47,6 @@ export default async function AdminDashboard(){ // need to understand what forma
             <DashboardCard  title="Sales" subtitle={`${formatNumber(numberOfSales)} orders`} body={formatCurrency(amount)}/>
             <DashboardCard  title="Customer" subtitle={`${formatCurrency(averageValuePerUser)} average value`} body={formatNumber(userCount)}/>
             <DashboardCard  title="Active Products" subtitle={`${formatCurrency(inActiveProduct)} inactive products`} body={formatNumber(activeProduct)}/>
-
         </div>
     )
 }
