@@ -5,7 +5,12 @@ import { getUser } from '@/app/data-access/product'
 import SkeletonCard from '@/components/SkeletonCard'
 
 async function page() {
-  const user = await getUser()
+
+      const user = await getUser();
+
+      if (!user){
+        return <div className="w-full p-10 max-w-7xl mx-auto text-red-300">No user found</div>
+      }
   return (
     <Suspense fallback={<SkeletonCard/>}>
       <div className="w-full p-10 max-w-7xl mx-auto">
