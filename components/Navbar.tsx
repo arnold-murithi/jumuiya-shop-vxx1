@@ -17,12 +17,7 @@ const Navbar = () => {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
-  const handleLoginClick = () =>{
-    router.push('/dashboard/login')
-  }
-  const handleSignupClick = () =>{
-    router.push('/dashboard/signup')
-  }
+
 
   return (
     <nav className="bg-blue-500 text-white">
@@ -55,11 +50,8 @@ const Navbar = () => {
               <div className="relative">
                 <SearchPage />
               </div>
-              <button onClick={handleLoginClick} className=" ml-3 bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded-md">
-                Login
-              </button>
-              <button onClick={handleSignupClick} className=" ml-3 bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded-md">
-                Signup
+              <button className=" ml-3 bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded-md">
+                Signout
               </button>
               {/*<User className="ml-3 h-6 w-6" />*/}
               <CartComponent data-test="cart-component"/>

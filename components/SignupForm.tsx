@@ -5,6 +5,9 @@ import { useForm } from "react-hook-form"
 import {zodResolver} from "@hookform/resolvers/zod"
 import { signupSchema } from '@/lib/schema'
 import { z } from 'zod'
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { register as registerUser } from '@/app/lib/actions';
 
 
 
@@ -12,64 +15,47 @@ import { z } from 'zod'
 type SignupSchema = z.infer<typeof signupSchema>
 
 
-function Signup() {
-
+export default function Signup() {
+const router = useRouter();
+const [isLoading, setIsLoading] = useState(false)
+const  [error, setError] = useState<string | null>(null)
 
   const {register, handleSubmit,reset, 
     formState:{errors, isSubmitting},
-    setError, watch,
     } = useForm<SignupSchema>({
-      resolver: zodResolver(signupSchema)
+      resolver: zodResolver(signupSchema),
+      defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
     })
     
 
   const onSubmit = async(data:SignupSchema) =>{
-    //send data to the route handler
-   const response = await fetch('api/signup',{
-    method: "POST",
-    body: JSON.stringify({
-      name: data.name,
-      email: data.email,
-      password: data.password,
-      confirmPassword: data.confirmPassword,
-    }),
-    headers:{
-      "Content-type":"application/json"
-    }
-   })
-   const responseData  = await response.json()
-   if (!response.ok){
-    alert ("Submitting form failed")
+   setIsLoading(true)
+   setError(null)
 
+   try {
+   const result = await registerUser({
+        name: data.name,
+        email: data.email,
+        password: data.password,
+      })
+   
+   if (result.success){
+     router.push("/dashboard/login?registered=true")
+    router.refresh();
+   }else{
+    setError(result.error || "Something went wrong. Please try again.")
    } 
    //console.log(responseData)
-   if (responseData.errors){
-    const errors = responseData.errors;
-    if (errors.name){
-      setError("name", {
-        type:"server",
-        message: errors.name
-      })
-    }else if (errors.email){
-      setError("email",{
-        type: "server",
-        message: errors.email
-      })
-    }else if(errors.password){
-      setError("password", {
-        type: "server",
-        message: errors.password
-      })
-    }else if(errors.confirmPassword){
-      setError("confirmPassword", {
-        type: "server",
-        message: errors.confirmPassword
-      })
-    } else{
-      alert("Something went wrong")
-    }
+   } catch (error) {
+    setError("An error occurred. please try again")
+   } finally {
+    setIsLoading(false)
    }
-    //reset();
   }
    
   return (
@@ -131,7 +117,7 @@ function Signup() {
           disabled={isSubmitting}
           type="submit" 
           className="w-full block bg-blue-500 hover:bg-blue-400 focus:bg-blue-400 text-white font-semibold rounded-lg
-          px-4 py-3 mt-6 disabled:bg-gray-500">Sign up</button>
+          px-4 py-3 mt-6 disabled:bg-gray-500">{isSubmitting?"Signing up":"Sign up"}</button>
         </form>
         <hr className="my-6 border-gray-300 w-full"/>
          <button 
@@ -145,12 +131,10 @@ function Signup() {
               </span>
           </div>
         </button>
-        <p className="text-sm text-gray-500 mt-8 ml-2">&copy; 2024 ku Ecommerce</p>
+        <p className="text-sm text-gray-500 mt-8 ml-2">&copy; 2025 Ecommerce</p>
       </div>
     </div>
   
   </section>
   )
 }
-
-export default Signup
